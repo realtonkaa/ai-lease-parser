@@ -209,3 +209,6 @@ if all_records:
     ]
     df = pd.DataFrame(display_records)
     st.dataframe(df, use_container_width=True)
+
+# Field editing support was added above in the main flow.
+# This section reserved for future enhancements.
