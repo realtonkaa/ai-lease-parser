@@ -264,3 +264,7 @@ def get_values(extraction_results: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
 def get_confidence_scores(extraction_results: Dict[str, Dict[str, Any]]) -> Dict[str, float]:
     """Return {field: confidence} dict from extraction results."""
     return {field: entry["confidence"] for field, entry in extraction_results.items()}
+
+
+# LLM extraction is implemented in extract_with_llm() above.
+# Use extract(text, use_llm=True) to enable it.
