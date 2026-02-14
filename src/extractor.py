@@ -268,3 +268,6 @@ def get_confidence_scores(extraction_results: Dict[str, Dict[str, Any]]) -> Dict
 
 # LLM extraction is implemented in extract_with_llm() above.
 # Use extract(text, use_llm=True) to enable it.
+
+# Confidence scores are returned per field alongside extracted values.
+# A confidence of 0.8 means regex matched; 0.0 means field not found.
