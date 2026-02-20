@@ -148,3 +148,6 @@ def _extract_pdf_pages(path: Path) -> list:
             pass  # Return sparse pdfplumber text if OCR not available
 
     return pages_text
+
+# Multi-page lease support: extract_pages() returns one string per page.
+# read_file() joins all pages into a single string for extraction.
