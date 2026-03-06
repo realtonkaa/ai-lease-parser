@@ -271,3 +271,8 @@ def get_confidence_scores(extraction_results: Dict[str, Dict[str, Any]]) -> Dict
 
 # Confidence scores are returned per field alongside extracted values.
 # A confidence of 0.8 means regex matched; 0.0 means field not found.
+
+# Improved patterns handle edge cases like:
+#   "Rent amount: 1500" (no dollar sign)
+#   "MONTHLY RENT $1,450" (all caps, no colon)
+#   "rent of one thousand dollars" (not handled - LLM mode recommended)
