@@ -144,3 +144,16 @@ This project was built with assistance from Claude (Anthropic). Claude helped de
 ## License
 
 MIT License. See LICENSE for details.
+
+---
+
+## Built With Claude
+
+This project was developed with Claude (claude-sonnet-4-6) by Anthropic. Claude assisted with:
+
+- Designing the extraction architecture and field schema
+- Writing regex patterns for diverse residential lease formats
+- Building the validation logic for dates, amounts, and required fields
+- Structuring the test suite (173 tests across 5 test files)
+
+Claude Code: https://claude.ai/code
