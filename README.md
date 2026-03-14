@@ -1,16 +1,32 @@
 # AI Lease Parser
 
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://img.shields.io/badge/tests-173%20passing-brightgreen)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+
 A Python tool that extracts structured data from residential lease PDFs using OCR and AI. Point it at a lease document and get back a clean spreadsheet with rent amounts, dates, tenant names, and more.
 
----
+## Table of Contents
+
+- [Why I Built This](#why-i-built-this)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
+- [How It Works](#how-it-works)
+- [Example Output](#example-output)
+- [Limitations](#limitations)
+- [Running Tests](#running-tests)
+- [References](#references)
+- [Built With Claude](#built-with-claude)
+- [License](#license)
 
 ## Why I Built This
 
 Landlords and property managers waste hours manually typing lease data into spreadsheets. When you manage dozens of properties, re-keying tenant names, rent amounts, start dates, and deposit figures from PDFs is tedious and error-prone.
 
 I built this tool to automate that workflow. Drop in a lease PDF, get back a structured CSV or Excel file with every key field extracted and validated. No more copying numbers by hand.
-
----
 
 ## Features
 
@@ -41,7 +57,15 @@ I built this tool to automate that workflow. Drop in a lease PDF, get back a str
 | parking | string | no |
 | renewal_terms | string | no |
 
----
+## Quick Start
+
+```bash
+git clone https://github.com/realtonkaa/ai-lease-parser.git
+cd ai-lease-parser
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python -m src.cli your_lease.pdf --output extracted.csv
+```
 
 ## Installation
 
@@ -57,8 +81,6 @@ For OCR support on scanned PDFs, also install Tesseract:
 - Ubuntu: `sudo apt install tesseract-ocr`
 - macOS: `brew install tesseract`
 - Windows: Download the installer from https://github.com/UB-Mannheim/tesseract/wiki
-
----
 
 ## Usage
 
@@ -88,21 +110,17 @@ streamlit run app/app.py
 
 Then open http://localhost:8501 in your browser. Drag and drop lease PDFs, review extracted fields, edit any corrections, and download as CSV or Excel.
 
----
-
 ## How It Works
 
-1. **PDF reading** — pdfplumber extracts text layer from digital PDFs. If the text is sparse (scanned document), pytesseract OCR reads the page images instead.
+1. **PDF reading:** pdfplumber extracts text layer from digital PDFs. If the text is sparse (scanned document), pytesseract OCR reads the page images instead.
 
-2. **Regex extraction** — A set of patterns tuned for common lease language pulls out fields like rent amounts, dates, and names from the raw text. This works offline with no API calls.
+2. **Regex extraction:** A set of patterns tuned for common lease language pulls out fields like rent amounts, dates, and names from the raw text. This works offline with no API calls.
 
-3. **LLM extraction (optional)** — When `--use-llm` is passed and `OPENAI_API_KEY` is set, the text is sent to OpenAI GPT-4o-mini with a structured prompt. The LLM result is merged with the regex result, preferring whichever has higher confidence.
+3. **LLM extraction (optional):** When `--use-llm` is passed and `OPENAI_API_KEY` is set, the text is sent to OpenAI GPT-4o-mini with a structured prompt. The LLM result is merged with the regex result, preferring whichever has higher confidence.
 
-4. **Validation** — Extracted values are checked: dates must be parseable and end > start, rent must be between $100 and $50,000/month, deposit should not exceed 3x rent, required fields must be present.
+4. **Validation:** Extracted values are checked: dates must be parseable and end > start, rent must be between $100 and $50,000/month, deposit should not exceed 3x rent, required fields must be present.
 
-5. **Export** — Results are written to CSV or Excel with one row per lease.
-
----
+5. **Export:** Results are written to CSV or Excel with one row per lease.
 
 ## Example Output
 
@@ -112,8 +130,6 @@ sample_lease_1.txt,Maria Garcia,Robert J. Henderson,"742 Evergreen Terrace, Apt 
 sample_lease_2.txt,James T. Wilson and Sarah K. Wilson,Greenfield Property Management LLC,"1500 Oak Boulevard, Unit 7, Austin, TX 78701",2100.0,2100.0,...
 ```
 
----
-
 ## Limitations
 
 - Regex extraction works best on standard lease formats. Highly unusual layouts may miss fields.
@@ -122,15 +138,17 @@ sample_lease_2.txt,James T. Wilson and Sarah K. Wilson,Greenfield Property Manag
 - LLM extraction requires an OpenAI API key and incurs API costs (~$0.01 per lease with gpt-4o-mini).
 - The tool extracts data as-is; it does not interpret legal language or give legal advice.
 
----
-
 ## Running Tests
 
 ```bash
 pytest tests/ -v
 ```
 
----
+## References
+
+- pdfplumber: PDF parsing library ([GitHub](https://github.com/jsvine/pdfplumber))
+- Tesseract OCR Engine ([GitHub](https://github.com/tesseract-ocr/tesseract))
+- Consumer.gov Sample Rental Agreement ([PDF](https://www.consumer.gov/sites/www.consumer.gov/files/articles/pdf/pdf-1050g-sample_rental_agreement_basic_beginning_renting_an_apartment_or_house.pdf))
 
 ## Built With Claude
 
@@ -142,8 +160,6 @@ I used [Claude](https://claude.ai) (Anthropic's AI assistant) as a development p
 - Structuring the test suite across 5 modules
 
 The project concept came from watching a property manager spend hours retyping lease data into spreadsheets. I designed the tool, chose the OCR + regex + LLM hybrid approach, and made all architecture decisions. Claude helped me implement faster and catch edge cases I would have missed.
-
----
 
 ## License
 
