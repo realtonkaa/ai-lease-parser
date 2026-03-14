@@ -134,26 +134,17 @@ pytest tests/ -v
 
 ## Built With Claude
 
-This project was built with assistance from Claude (Anthropic). Claude helped design the field extraction architecture, write regex patterns for diverse lease formats, and structure the test suite.
+I used [Claude](https://claude.ai) (Anthropic's AI assistant) as a development partner on this project. Claude helped me with:
 
-- Claude: https://claude.ai
-- Anthropic: https://anthropic.com
+- Designing the field extraction architecture and deciding which lease fields matter most
+- Writing regex patterns that handle the dozen different ways landlords format leases
+- Building validation logic for dates, rent ranges, and deposit ratios
+- Structuring the test suite across 5 modules
+
+The project concept came from watching a property manager spend hours retyping lease data into spreadsheets. I designed the tool, chose the OCR + regex + LLM hybrid approach, and made all architecture decisions. Claude helped me implement faster and catch edge cases I would have missed.
 
 ---
 
 ## License
 
 MIT License. See LICENSE for details.
-
----
-
-## Built With Claude
-
-This project was developed with Claude (claude-sonnet-4-6) by Anthropic. Claude assisted with:
-
-- Designing the extraction architecture and field schema
-- Writing regex patterns for diverse residential lease formats
-- Building the validation logic for dates, amounts, and required fields
-- Structuring the test suite (173 tests across 5 test files)
-
-Claude Code: https://claude.ai/code
